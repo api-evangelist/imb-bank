@@ -1,0 +1,44 @@
+generated: '2026-07-20'
+method: searched
+source: https://openbank.openbanking.imb.com.au/.well-known/openid-configuration
+docs: https://www.imb.com.au/openbanking
+note: Conformance asserted from IMB's live OIDC discovery document, the captured CDR
+  Banking OpenAPI, and IMB's published CDR posture (data holder since 1 Oct 2020,
+  APRA-regulated ADI, published CDR Policy).
+standards:
+- id: au-cdr-consumer-data-standards
+  conforms: true
+  evidence: APIs built to the Australian Consumer Data Standards (CDS) banking sector;
+    /cds-au/v1 path, x-v endpoint versioning, ErrorV2 error envelope, live PRD API.
+- id: openid-connect
+  conforms: true
+  evidence: /.well-known/openid-configuration present; issuer, authorization/token
+    endpoints, id_token PS256.
+- id: oauth2
+  conforms: true
+  evidence: grant_types authorization_code, client_credentials, refresh_token; scopes_supported.
+- id: fapi
+  conforms: true
+  evidence: acr urn:cds.au:cdr:2, PS256 request objects, code_challenge S256, x-fapi-interaction-id
+    response headers throughout the spec.
+- id: rfc9126-pushed-authorization-requests
+  conforms: true
+  evidence: require_pushed_authorization_requests true; pushed_authorization_request_endpoint
+    published.
+- id: rfc8705-mtls-bound-tokens
+  conforms: true
+  evidence: tls_client_certificate_bound_access_tokens true; mTLS data-holder gateway.
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported [S256].
+- id: cdr-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint published; cdr:registration scope.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: CDR uses the CDS ErrorV2 envelope (errors[] with urn:au-cds:error codes)
+    over application/json, not application/problem+json.
+- id: cursor-pagination
+  conforms: false
+  evidence: CDR uses page/page-size offset pagination with links.first/prev/next/last,
+    not cursor pagination.

@@ -1,0 +1,92 @@
+{
+  "request_parameter_supported": true,
+  "pushed_authorization_request_endpoint": "https://openbank-secure.openbanking.imb.com.au/api/openbanking/push-authorization/par",
+  "claims_parameter_supported": true,
+  "introspection_endpoint": "https://openbank-secure.openbanking.imb.com.au/oauth2/introspect",
+  "scopes_supported": [
+    "openid",
+    "profile",
+    "common:customer.basic:read",
+    "common:customer.detail:read",
+    "bank:regular_payments:read",
+    "bank:accounts.detail:read",
+    "bank:accounts.basic:read",
+    "bank:transactions:read",
+    "bank:payees:read",
+    "admin:metrics.basic:read",
+    "admin:metadata:update",
+    "cdr:registration"
+  ],
+  "check_session_iframe": "https://auth.openbanking.imb.com.au/oidc/checksession",
+  "issuer": "https://openbank.openbanking.imb.com.au",
+  "acr_values_supported": [
+    "urn:cds.au:cdr:2"
+  ],
+  "id_token_encryption_enc_values_supported": [
+    "A128CBC-HS256",
+    "A256GCM"
+  ],
+  "authorization_endpoint": "https://auth.openbanking.imb.com.au/oauth2/authorize",
+  "claims_supported": [
+    "name",
+    "given_name",
+    "family_name",
+    "acr",
+    "auth_time",
+    "sub",
+    "refresh_token_expires_at",
+    "sharing_expires_at",
+    "updated_at"
+  ],
+  "userinfo_signing_alg_values_supported": [
+    "PS256"
+  ],
+  "require_pushed_authorization_requests": true,
+  "token_endpoint_auth_methods_supported": [
+    "private_key_jwt"
+  ],
+  "tls_client_certificate_bound_access_tokens": true,
+  "response_modes_supported": [
+    "fragment",
+    "jwt"
+  ],
+  "token_endpoint": "https://openbank-secure.openbanking.imb.com.au/oauth2/token",
+  "response_types_supported": [
+    "code"
+  ],
+  "id_token_signing_alg": [
+    "PS256"
+  ],
+  "cdr_arrangement_revocation_endpoint": "https://openbank-secure.openbanking.imb.com.au/arrangements/1.0.0/revoke",
+  "grant_types_supported": [
+    "authorization_code",
+    "client_credentials",
+    "refresh_token"
+  ],
+  "end_session_endpoint": "https://auth.openbanking.imb.com.au/oidc/logout",
+  "revocation_endpoint": "https://openbank-secure.openbanking.imb.com.au/oauth2/revoke",
+  "userinfo_endpoint": "https://openbank-secure.openbanking.imb.com.au/oauth2/userinfo",
+  "token_endpoint_auth_signing_alg_values_supported": [
+    "PS256"
+  ],
+  "code_challenge_methods_supported": [
+    "S256"
+  ],
+  "id_token_encryption_alg_values_supported": [
+    "RSA-OAEP"
+  ],
+  "jwks_uri": "https://openbank.openbanking.imb.com.au/oauth2/jwks",
+  "subject_types_supported": [
+    "pairwise"
+  ],
+  "id_token_signing_alg_values_supported": [
+    "PS256"
+  ],
+  "registration_endpoint": "https://openbank-secure.openbanking.imb.com.au/open-banking/0.2/register",
+  "authorization_signing_alg_values_supported": [
+    "PS256"
+  ],
+  "request_object_signing_alg_values_supported": [
+    "PS256"
+  ]
+}

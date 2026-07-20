@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/imb-bank-cds-banking-products-openapi.yml
+note: No official IMB-hosted MCP server was found. This is a candidate tool surface
+  derived from the captured CDR Banking OpenAPI operations. The two product tools map
+  to IMB's live, unauthenticated Product Reference Data API; the remaining tools require
+  the CDR consent/authorisation flow (FAPI OAuth2 + mTLS) and are listed for completeness.
+server:
+  name: imb-bank
+  transport: http
+tools:
+- name: list_banking_products
+  description: List IMB Bank's publicly available retail banking products (home loans,
+    deposits, cards, etc.). Public, no auth.
+  source_operation: openapi/imb-bank-cds-banking-products-openapi.yml#listBankingProducts
+  auth: none
+- name: get_banking_product_detail
+  description: Get full detail for a single IMB banking product by productId (fees,
+    rates, features, eligibility). Public, no auth.
+  source_operation: openapi/imb-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+  auth: none
+- name: list_banking_accounts
+  description: List the consumer's accounts.
+  source_operation: openapi/imb-bank-cds-banking-products-openapi.yml#listBankingAccounts
+  auth: cdr-consent
+- name: get_banking_account_detail
+  description: Get detail for one consented account.
+  source_operation: openapi/imb-bank-cds-banking-products-openapi.yml#getBankingAccountDetail
+  auth: cdr-consent
+- name: list_banking_transactions
+  description: List transactions for a consented account.
+  source_operation: openapi/imb-bank-cds-banking-products-openapi.yml#listBankingTransactions
+  auth: cdr-consent
+- name: list_banking_payees
+  description: List the consumer's saved payees.
+  source_operation: openapi/imb-bank-cds-banking-products-openapi.yml#listBankingPayees
+  auth: cdr-consent
+- name: list_direct_debits
+  description: List direct debit authorisations for a consented account.
+  source_operation: openapi/imb-bank-cds-banking-products-openapi.yml#listDirectDebits
+  auth: cdr-consent
+- name: list_scheduled_payments
+  description: List scheduled payments for a consented account.
+  source_operation: openapi/imb-bank-cds-banking-products-openapi.yml#listScheduledPayments
+  auth: cdr-consent

@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.imb.com.au/openbanking
+versioning:
+  scheme: header
+  mechanism: CDS endpoint versioning via the x-v request header (and optional x-min-v);
+    responses echo the served version in x-v.
+  prd_supported_versions: [4, 5]
+  cds_spec_version: 1.36.0
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+deprecation:
+  policy: Endpoint versions follow the Consumer Data Standards obsolescence/retirement
+    lifecycle; the Data Standards Body sets the future-dated obligation and retirement
+    dates that data holders such as IMB implement.
+  sunset_header: false
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+status_page: https://www.imb.com.au/help-centre/banking-help/service-updates
+status_page_note: IMB publishes planned outages, maintenance windows, and service
+  interruptions (including CDR/API impacts) on its Service Updates page.
+sla:
+  note: Under the CDR rules IMB must meet Data Standards performance and availability
+    requirements; IMB does not publish a separate developer SLA document.
+program_launched: '2020-10-01'
+deprecated_operations: []

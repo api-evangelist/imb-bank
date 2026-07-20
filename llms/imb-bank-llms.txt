@@ -1,0 +1,39 @@
+# IMB Bank
+
+> IMB Bank (IMB Ltd, ABN 92 087 651 974) is a member-owned Australian mutual bank founded in 1880, regulated by APRA and ASIC. Under Australia's Consumer Data Right (CDR / Open Banking) it is a data holder that exposes a public, unauthenticated Product Reference Data (PRD) API and an accredited consent flow for member banking data, via the IMB Innovation Sandbox and Marketplace.
+
+## APIs
+
+- [CDR Product Reference Data API](https://www.imb.com.au/openbanking): Public, unauthenticated CDR banking products API. Live base: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products (send x-v: 4). Operations listBankingProducts and getBankingProductDetail.
+
+## Specs
+
+- [OpenAPI (CDR Banking)](openapi/imb-bank-cds-banking-products-openapi.yml): CDS Banking OpenAPI 3.0.3, spec version 1.36.0.
+- [OpenAPI Overlay](overlays/imb-bank-cds-banking-products-overlay.yaml): API Evangelist enhancements.
+
+## Identity & security
+
+- [OIDC discovery](well-known/imb-bank-openid-configuration.json): FAPI / AU-CDR authorization server (PAR required, private_key_jwt, mTLS-bound tokens).
+- [Authentication profile](authentication/imb-bank-authentication.yml)
+- [OAuth scopes](scopes/imb-bank-scopes.yml)
+- [Conformance](conformance/imb-bank-conformance.yml): AU-CDR, OIDC, OAuth2, FAPI, PAR (RFC 9126), mTLS-bound tokens (RFC 8705).
+- [Domain security](security/imb-bank-domain-security.yml)
+
+## Semantics
+
+- [Conventions](conventions/imb-bank-conventions.yml): x-v versioning, page/page-size pagination, x-fapi-interaction-id tracing.
+- [Error catalog](errors/imb-bank-problem-types.yml): CDS ErrorV2 (urn:au-cds:error) codes.
+- [Lifecycle](lifecycle/imb-bank-lifecycle.yml)
+- [Data model](data-model/imb-bank-data-model.yml)
+
+## Docs
+
+- [Open Banking at IMB](https://www.imb.com.au/openbanking)
+- [Developer portal / sandbox](https://developer.openbanking.imb.com.au/public/apis)
+- [API reference](https://developer.openbanking.imb.com.au/public/apis)
+- [Service updates / status](https://www.imb.com.au/help-centre/banking-help/service-updates)
+
+## Agent
+
+- [MCP tool surface (candidate)](mcp/imb-bank-mcp.yml)
+- [Agent skill: browse products](skills/imb-bank-browse-products.md)

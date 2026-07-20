@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/imb-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#http-headers
+note: Cross-cutting request/response semantics for IMB's CDR Banking API, per the
+  Australian Consumer Data Standards. Read-only banking surface (GET operations only).
+authentication:
+  public_prd: none (unauthenticated Product Reference Data)
+  member_data: FAPI / AU-CDR OAuth2 authorization_code with PAR + private_key_jwt +
+    mTLS-bound tokens (see authentication/imb-bank-authentication.yml)
+versioning:
+  style: header
+  request_headers: [x-v, x-min-v]
+  response_headers: [x-v]
+  detail: Clients set x-v to the desired endpoint version; the server serves the highest
+    supported version within [x-min-v, x-v] and echoes it in x-v.
+idempotency:
+  supported: false
+  detail: The banking data surface is read-only (GET); the CDS defines no idempotency-key
+    for these endpoints.
+pagination:
+  style: page-number
+  request_params: [page, page-size]
+  page_size_max: 1000
+  response_fields: [meta.totalRecords, meta.totalPages, links.self, links.first, links.prev,
+    links.next, links.last]
+request_tracing:
+  header: x-fapi-interaction-id
+  detail: RFC/FAPI interaction id; when supplied it is echoed on the response, otherwise
+    the server generates one. Present on every response in the spec.
+  related_headers: [x-fapi-auth-date, x-fapi-customer-ip-address, x-cds-client-headers]
+error_envelope:
+  media_type: application/json
+  schema: ResponseErrorListV2 (errors[] with urn:au-cds:error codes)
+  see: errors/imb-bank-problem-types.yml
+rate_limit_signaling:
+  detail: Governed by the CDS Traffic Thresholds (per-session and per-customer transaction
+    limits); not surfaced as response headers in this spec.
+cross_references:
+  authentication: authentication/imb-bank-authentication.yml
+  scopes: scopes/imb-bank-scopes.yml
+  errors: errors/imb-bank-problem-types.yml
+  lifecycle: lifecycle/imb-bank-lifecycle.yml

@@ -52,12 +52,50 @@ apis:
     versions x-v 4 and 5. Covers the GET /banking/products list and GET
     /banking/products/{productId} detail operations.
 common:
+- type: DomainSecurity
+  url: security/imb-bank-domain-security.yml
+- type: WellKnown
+  url: well-known/imb-bank-well-known.yml
+- type: Authentication
+  url: authentication/imb-bank-authentication.yml
+- type: OAuthScopes
+  url: scopes/imb-bank-scopes.yml
+- type: Conformance
+  url: conformance/imb-bank-conformance.yml
+- type: Compliance
+  url: https://www.imb.com.au/pdfs/consumer-data-right-policy
+- type: ErrorCatalog
+  url: errors/imb-bank-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/imb-bank-lifecycle.yml
+- type: StatusPage
+  url: https://www.imb.com.au/help-centre/banking-help/service-updates
+- type: Conventions
+  url: conventions/imb-bank-conventions.yml
+- type: DataModel
+  url: data-model/imb-bank-data-model.yml
+- type: Sandbox
+  url: sandbox/imb-bank-sandbox.yml
+- type: MCPServer
+  url: mcp/imb-bank-mcp.yml
+- type: Overlay
+  url: overlays/imb-bank-cds-banking-products-overlay.yaml
+- type: LLMsTxt
+  url: llms/imb-bank-llms.txt
+- type: AgentSkill
+  url: skills/imb-bank-browse-products.md
 - type: Website
   url: https://www.imb.com.au/
 - type: DeveloperPortal
   url: https://developer.openbanking.imb.com.au/public/apis
 - type: Documentation
   url: https://www.imb.com.au/openbanking
+- type: APIReference
+  url: https://developer.openbanking.imb.com.au/public/apis
+- type: GettingStarted
+  url: https://developer.openbanking.imb.com.au/public/apis
+- type: SignUp
+  url: https://developer.openbanking.imb.com.au/
 - type: TermsOfService
   url: https://www.imb.com.au/important-information
 - type: PrivacyPolicy

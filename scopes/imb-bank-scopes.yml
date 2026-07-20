@@ -1,0 +1,56 @@
+generated: '2026-07-20'
+method: searched
+source: https://openbank.openbanking.imb.com.au/.well-known/openid-configuration
+docs: https://consumerdatastandardsaustralia.github.io/standards/#end-points
+note: Scopes captured verbatim from IMB's live OIDC discovery document (scopes_supported).
+  Descriptions follow the Australian Consumer Data Standards (CDS) authorisation scopes
+  for the banking sector. Access to member banking data requires the CDR consent flow
+  (PAR + private_key_jwt + mTLS); the public Product Reference Data API is unauthenticated
+  and requires no scope.
+schemes:
+- name: OpenIDConnect
+  source: well-known/imb-bank-openid-configuration.json
+  issuer: https://openbank.openbanking.imb.com.au
+  authorization_endpoint: https://auth.openbanking.imb.com.au/oauth2/authorize
+  token_endpoint: https://openbank-secure.openbanking.imb.com.au/oauth2/token
+  pushed_authorization_request_endpoint: https://openbank-secure.openbanking.imb.com.au/api/openbanking/push-authorization/par
+  registration_endpoint: https://openbank-secure.openbanking.imb.com.au/open-banking/0.2/register
+  grant_types: [authorization_code, client_credentials, refresh_token]
+  acr_values: [urn:cds.au:cdr:2]
+scopes:
+- scope: openid
+  description: OpenID Connect authentication; issue an ID token for the CDR consumer.
+  flows: [authorizationCode]
+- scope: profile
+  description: End-user profile claims (name, given_name, family_name).
+  flows: [authorizationCode]
+- scope: common:customer.basic:read
+  description: Read the basic customer record (name and occupation / organisation type).
+  flows: [authorizationCode]
+- scope: common:customer.detail:read
+  description: Read customer contact details (address, phone, email).
+  flows: [authorizationCode]
+- scope: bank:accounts.basic:read
+  description: Read basic account data (account name, type, balance, product category).
+  flows: [authorizationCode]
+- scope: bank:accounts.detail:read
+  description: Read detailed account data (account numbers, features, fees, rates).
+  flows: [authorizationCode]
+- scope: bank:transactions:read
+  description: Read account transactions (amounts, descriptions, timestamps).
+  flows: [authorizationCode]
+- scope: bank:payees:read
+  description: Read the customer's saved payees.
+  flows: [authorizationCode]
+- scope: bank:regular_payments:read
+  description: Read direct debits and scheduled/regular payments.
+  flows: [authorizationCode]
+- scope: admin:metrics.basic:read
+  description: Data-holder admin scope for the CDR Get Metrics reporting endpoint.
+  flows: [clientCredentials]
+- scope: admin:metadata:update
+  description: Data-holder admin scope for CDR Register metadata update notifications.
+  flows: [clientCredentials]
+- scope: cdr:registration
+  description: Dynamic Client Registration (DCR) scope for accredited data recipients.
+  flows: [clientCredentials]

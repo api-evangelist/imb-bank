@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: searched
+source: https://openbank.openbanking.imb.com.au/.well-known/openid-configuration
+docs: https://www.imb.com.au/openbanking
+note: IMB's captured OpenAPI (the CDR Banking spec) declares no securitySchemes because
+  the public Product Reference Data (PRD) endpoints are unauthenticated. The authenticated
+  member-data surface uses the Australian CDR security profile, captured here from
+  the live OIDC discovery document.
+summary:
+  types: [none, openIdConnect, oauth2, mutualTLS]
+  public_prd: unauthenticated
+  oauth2_flows: [authorizationCode, clientCredentials, refreshToken]
+  token_endpoint_auth: private_key_jwt
+  profile: FAPI / AU-CDR (acr urn:cds.au:cdr:2)
+schemes:
+- name: PublicProductReferenceData
+  type: none
+  description: The GET /banking/products and GET /banking/products/{productId} endpoints
+    are public and unauthenticated per the CDR Product Reference Data requirement;
+    callers send only x-v (endpoint version) headers.
+  applies_to: [listBankingProducts, getBankingProductDetail]
+- name: CDROpenIDConnect
+  type: openIdConnect
+  openIdConnectUrl: https://openbank.openbanking.imb.com.au/.well-known/openid-configuration
+  description: Australian Consumer Data Right authorization for member banking data.
+    Authorization Code flow with PKCE (S256), Pushed Authorization Requests (RFC 9126,
+    required), private_key_jwt client authentication (PS256), and TLS client-certificate-bound
+    access tokens (RFC 8705 / FAPI). Response modes fragment and jwt.
+  authorization_endpoint: https://auth.openbanking.imb.com.au/oauth2/authorize
+  token_endpoint: https://openbank-secure.openbanking.imb.com.au/oauth2/token
+  par_endpoint: https://openbank-secure.openbanking.imb.com.au/api/openbanking/push-authorization/par
+  jwks_uri: https://openbank.openbanking.imb.com.au/oauth2/jwks
+  require_pushed_authorization_requests: true
+  tls_client_certificate_bound_access_tokens: true
+- name: MutualTLS
+  type: mutualTLS
+  description: The data-holder resource endpoints are exposed over an mTLS gateway
+    (server url pattern https://mtls.dh.example.com/cds-au/v1 in the CDS spec); accredited
+    data recipients present a client certificate issued under the CDR trust framework.

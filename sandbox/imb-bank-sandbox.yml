@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.openbanking.imb.com.au/public/apis
+note: IMB operates a public developer sandbox and API marketplace, the "IMB Innovation
+  Sandbox and Marketplace". It lets developers register, browse the published CDR
+  APIs, and test integrations before going live. No published static test credentials
+  or magic test values were found; sandbox access is provisioned per registered app.
+  No values are invented here.
+sandbox:
+  name: IMB Innovation Sandbox and Marketplace
+  portal: https://developer.openbanking.imb.com.au/
+  api_catalog: https://developer.openbanking.imb.com.au/public/apis
+  api_console: https://developer.openbanking.imb.com.au/public/apis/api-console
+  gateway: WSO2 API Manager (APIM)
+environments:
+- name: public-prd
+  base_url: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products
+  auth: none
+  note: Live, unauthenticated Product Reference Data — call directly with an x-v header
+    (e.g. x-v 4); returns HTTP 200 with data.products.
+- name: consent-sandbox
+  auth: cdr-consent
+  note: Authenticated member-data flows are exercised through the sandbox with app
+    registration; test consumers/accounts are provisioned per registered app rather
+    than published as static fixtures.
+getting_started:
+  register: https://developer.openbanking.imb.com.au/
+  steps:
+  - Create a developer account on the IMB Innovation Sandbox portal.
+  - Browse the published APIs in the marketplace / API console.
+  - Register an application to obtain sandbox credentials.
+  - For member data, complete CDR accreditation and the FAPI consent flow.

@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of /.well-known/ on IMB CDR hosts
+host: https://openbank.openbanking.imb.com.au
+documents:
+- path: /.well-known/openid-configuration
+  status: 200
+  file: imb-bank-openid-configuration.json
+  note: Real OIDC discovery document for IMB's CDR authorization server (FAPI/CDR
+    profile, PAR required, private_key_jwt, mTLS-bound tokens).
+- path: /.well-known/security.txt
+  status: 200
+  note: Returns the WSO2 API Manager gateway placeholder ("Welcome to APIM"), not a
+    real RFC 9116 security.txt. Not saved.
+- path: /.well-known/oauth-authorization-server
+  status: 200
+  note: APIM gateway placeholder, not a real RFC 8414 document. Not saved.
+- path: /.well-known/api-catalog
+  status: 200
+  note: APIM gateway placeholder, not a real RFC 9727 api-catalog. Not saved.
+other_hosts:
+- host: https://developer.openbanking.imb.com.au
+  note: Angular SPA (IMB Innovation Sandbox and Marketplace) returns the app index
+    HTML for every /.well-known/ path; no real discovery documents.
+- host: https://www.imb.com.au
+  note: All /.well-known/ paths return 404.

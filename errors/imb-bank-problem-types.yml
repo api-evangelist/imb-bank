@@ -1,0 +1,76 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/imb-bank-cds-banking-products-openapi.yml
+enriched_from: https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+format: cds-errorv2
+envelope:
+  media_type: application/json
+  schema: ResponseErrorListV2
+  shape: '{ "errors": [ { "code": "<urn>", "title": "...", "detail": "...", "meta":
+    {} } ] }'
+  note: Consumer Data Standards ErrorV2 envelope (not RFC 9457 problem+json). The code
+    is a urn:au-cds:error URN; application-specific errors carry the base URN in meta.urn.
+problems:
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/Invalid
+  title: Invalid Field
+  remediation: Correct the malformed field value in the request.
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/Missing
+  title: Missing Required Field
+  remediation: Supply the required field.
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/InvalidPageSize
+  title: Invalid Page Size
+  remediation: Use a page-size within the allowed range (1-1000).
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/InvalidDateTime
+  title: Invalid Date
+  remediation: Use an RFC 3339 / DateString value.
+- status: 400
+  code: urn:au-cds:error:cds-all:Header/Missing
+  title: Missing Required Header
+  remediation: Include the required header (e.g. x-v endpoint version).
+- status: 400
+  code: urn:au-cds:error:cds-all:Header/InvalidVersion
+  title: Invalid Version
+  remediation: Send a valid integer x-v (and optional x-min-v) endpoint version.
+- status: 404
+  code: urn:au-cds:error:cds-all:Resource/Invalid
+  title: Invalid Resource
+  remediation: The requested resource identifier is not valid.
+- status: 404
+  code: urn:au-cds:error:cds-all:Resource/NotImplemented
+  title: Resource Not Implemented
+  remediation: The endpoint is not implemented by this data holder.
+- status: 404
+  code: urn:au-cds:error:cds-all:Resource/Unavailable
+  title: Resource Not Found
+  remediation: The requested resource does not exist.
+- status: 404
+  code: urn:au-cds:error:cds-banking:Authorisation/InvalidBankingAccount
+  title: Invalid Banking Account
+  remediation: The account is not part of the current consent/authorisation.
+- status: 404
+  code: urn:au-cds:error:cds-banking:Authorisation/UnavailableBankingAccount
+  title: Unavailable Banking Account
+  remediation: The account exists but is not available under the current authorisation.
+- status: 406
+  code: urn:au-cds:error:cds-all:Header/UnsupportedVersion
+  title: Unsupported Version
+  remediation: Requested x-v/x-min-v range not supported; use a supported endpoint
+    version (PRD supports x-v 4 and 5).
+- status: 422
+  code: urn:au-cds:error:cds-all:Field/InvalidPage
+  title: Invalid Page
+  remediation: The requested page is out of range.
+- status: 422
+  code: urn:au-cds:error:cds-banking:Authorisation/InvalidBankingAccount
+  title: Invalid Banking Account
+  remediation: Account not covered by the authorisation.
+derived_operations:
+- listBankingProducts
+- getBankingProductDetail
+- listBankingAccounts
+- listBankingTransactions
+- listBankingPayees

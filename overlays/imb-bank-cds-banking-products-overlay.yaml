@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for IMB Bank CDR Banking API
+  version: 1.0.0
+extends: openapi/imb-bank-cds-banking-products-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: IMB Bank
+    x-apievangelist-slug: imb-bank
+    x-apievangelist-classification: consumer-data-right-banking
+    x-apievangelist-live-prd: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products
+    x-apievangelist-public-endpoints:
+    - listBankingProducts
+    - getBankingProductDetail
+- target: $.servers
+  update:
+    x-apievangelist-production-prd-base: https://openbank.openbanking.imb.com.au/cds-au/v1
+    x-apievangelist-note: The spec ships the placeholder mtls.dh.example.com server;
+      IMB's live public Product Reference Data base is openbank.openbanking.imb.com.au.
+- target: $.info
+  update:
+    x-apievangelist-auth: FAPI / AU-CDR OAuth2 (PAR + private_key_jwt + mTLS-bound
+      tokens); PRD endpoints are unauthenticated. See authentication/imb-bank-authentication.yml
+    x-apievangelist-oidc: https://openbank.openbanking.imb.com.au/.well-known/openid-configuration
+    x-apievangelist-versioning: header x-v/x-min-v (PRD supports x-v 4 and 5)

@@ -1,0 +1,77 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/imb-bank-cds-banking-products-openapi.yml
+note: Entity-relationship graph derived from the CDR Banking schema $ref links and
+  id-reference fields. Products are public (unauthenticated PRD); accounts and their
+  children are member-consented resources.
+entities:
+- name: BankingProduct
+  id: productId
+  access: public
+  key_schemas: [BankingProductV6, ResponseBankingProductListV4]
+  note: A retail banking product (home loan, deposit, card, etc.) with category, fees,
+    rates, features, eligibility and constraints.
+- name: BankingAccount
+  id: accountId
+  access: consented
+  key_schemas: [BankingAccount, BankingAccountDetail]
+- name: BankingBalance
+  id: accountId
+  access: consented
+  key_schemas: [BankingBalance, ResponseBankingAccountsBalanceList]
+- name: BankingTransaction
+  id: transactionId
+  access: consented
+  key_schemas: [BankingTransaction, BankingTransactionDetail]
+- name: BankingDirectDebit
+  access: consented
+  key_schemas: [BankingDirectDebit, BankingAuthorisedEntity]
+- name: BankingScheduledPayment
+  id: scheduledPaymentId
+  access: consented
+  key_schemas: [BankingScheduledPayment, BankingScheduledPaymentRecurrence]
+- name: BankingPayee
+  id: payeeId
+  access: consented
+  key_schemas: [BankingPayee, BankingPayeeDetail, BankingDomesticPayee, BankingBillerPayee,
+    BankingInternationalPayee, BankingDigitalWalletPayee]
+- name: BankingInstalmentPlan
+  id: instalmentPlanId
+  access: consented
+  key_schemas: [BankingInstalmentPlan, BankingInstalmentPlanSchedule]
+relationships:
+- from: BankingAccount
+  to: BankingProduct
+  type: belongs_to
+  via: productCategory
+- from: BankingAccount
+  to: BankingBalance
+  type: has_one
+  via: accountId
+- from: BankingAccount
+  to: BankingTransaction
+  type: has_many
+  via: accountId
+- from: BankingAccount
+  to: BankingDirectDebit
+  type: has_many
+  via: accountId
+- from: BankingAccount
+  to: BankingScheduledPayment
+  type: has_many
+  via: accountId
+- from: BankingAccount
+  to: BankingInstalmentPlan
+  type: has_many
+  via: accountId
+- from: BankingTransaction
+  to: BankingAccount
+  type: belongs_to
+  via: accountId
+- from: BankingScheduledPayment
+  to: BankingPayee
+  type: has_one
+  via: payeeReference
+id_prefixes:
+  note: CDR account/transaction/payee ids are opaque, tokenised (ASCII) identifiers
+    scoped to a consent arrangement; no stable human-readable prefix scheme.
