@@ -1,0 +1,71 @@
+aid: imb-bank
+url: https://raw.githubusercontent.com/api-evangelist/imb-bank/refs/heads/main/apis.yml
+name: IMB Bank
+kind: company
+description: IMB Bank (IMB Ltd, ABN 92 087 651 974) is a member-owned Australian mutual
+  bank founded in 1880 as the Illawarra Mutual Building Society in Wollongong, New
+  South Wales. It is an authorised deposit-taking institution (ADI) regulated by APRA
+  and ASIC, offering home loans, personal and business banking, deposits, cards and
+  insurance to members across NSW, Victoria and the ACT. As a mutual, IMB is owned
+  by its members rather than external shareholders. Under Australia's Consumer Data
+  Right (CDR / Open Banking), IMB operates as a data holder and exposes a public,
+  unauthenticated Product Reference Data (PRD) API conforming to the Consumer Data
+  Standards, alongside an accredited data recipient (ADR) consent flow for sharing
+  member banking data. IMB also runs a public developer sandbox and marketplace at
+  developer.openbanking.imb.com.au.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Banks
+- Open Banking
+- CDR
+- Consumer Banking
+- Australia
+- Mutual Bank
+- Product Reference Data
+created: '2026-07-20'
+modified: '2026-07-20'
+specificationVersion: '0.19'
+apis:
+- aid: imb-bank:imb-bank-cdr-product-reference-data-api
+  name: IMB Bank CDR Product Reference Data API
+  tags:
+  - CDR
+  - Open Banking
+  - Product Reference Data
+  - Banking Products
+  - Consumer Data Standards
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.imb.com.au/openbanking
+  baseURL: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products
+  properties:
+  - url: https://www.imb.com.au/openbanking
+    type: Documentation
+  - url: https://developer.openbanking.imb.com.au/public/apis
+    type: APIReference
+  - url: openapi/imb-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Public, unauthenticated Consumer Data Right (CDR) Product Reference
+    Data API exposing IMB Bank's retail banking products (home loans, deposits, cards
+    and more) under the Consumer Data Standards path /cds-au/v1/banking/products.
+    Confirmed live returning HTTP 200 with a data.products array; supports endpoint
+    versions x-v 4 and 5. Covers the GET /banking/products list and GET
+    /banking/products/{productId} detail operations.
+common:
+- type: Website
+  url: https://www.imb.com.au/
+- type: DeveloperPortal
+  url: https://developer.openbanking.imb.com.au/public/apis
+- type: Documentation
+  url: https://www.imb.com.au/openbanking
+- type: TermsOfService
+  url: https://www.imb.com.au/important-information
+- type: PrivacyPolicy
+  url: https://www.imb.com.au/important-information/privacy
+- type: Support
+  url: https://www.imb.com.au/help-centre
+- type: About
+  url: https://www.imb.com.au/about-us
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

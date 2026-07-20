@@ -1,0 +1,90 @@
+aid: imb-bank
+name: IMB Bank
+review:
+  question: Does IMB Bank expose a live, public CDR Product Reference Data API, and
+    does it publish a bank-proprietary OpenAPI contract?
+  answer: true
+  date: '2026-07-20'
+  reviewer: API Evangelist
+  cdrPrdConfirmed: true
+  specProvenance: cds-standard
+  specProvenanceNote: |
+    The harvested OpenAPI (openapi/imb-bank-cds-banking-products-openapi.yml) is the
+    SHARED Data Standards Body (DSB) Consumer Data Standards "CDR Banking API"
+    contract (OpenAPI 3.0.3, info.version 1.36.0), not an IMB-proprietary spec. It
+    was harvested verbatim from the ConsumerDataStandardsAustralia/standards
+    repository and converted JSON to YAML. IMB's PRD endpoint conforms to this
+    standard; IMB does not publish its own distinct machine-readable OpenAPI for the
+    products endpoint. Only the two public product paths (/banking/products and
+    /banking/products/{productId}) of this spec are unauthenticated; the remaining
+    banking paths require CDR ADR authorisation.
+findings:
+  summary: |
+    IMB Bank (IMB Ltd) is an Australian member-owned mutual ADI and an Open Banking
+    (Consumer Data Right) data holder. Its public, unauthenticated Product Reference
+    Data (PRD) API is live and confirmed: an HTTP GET to
+    https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products returns
+    HTTP 200 with a Consumer Data Standards payload (data.products array,
+    meta.totalRecords 34 across 7 pages) and an x-v response header. The endpoint
+    negotiates version via the x-v request header: x-v 1, 2 and 3 return HTTP 406
+    (UnsupportedVersion) while x-v 4 and 5 return HTTP 200, so the endpoint currently
+    supports CDS Get Products versions 4 and 5. IMB also runs a public developer
+    portal / sandbox ("IMB Innovation Sandbox and Marketplace") at
+    developer.openbanking.imb.com.au and a member-facing Open Banking explainer at
+    www.imb.com.au/openbanking. Only the Product Reference Data surface is public;
+    consumer banking data (accounts, balances, transactions, payees) is shared under
+    the CDR accredited-data-recipient (ADR) model, gated by CDR's FAPI-profiled
+    OAuth2 / OpenID Connect consumer authorisation, not by any public API key.
+    The publicly downloadable contract is the shared DSB CDS OpenAPI, not a
+    bank-proprietary spec.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products
+      documented: true
+      note: Public unauthenticated CDR Product Reference Data endpoint. Confirmed HTTP 200 with x-v 4 and 5.
+    - protocol: REST
+      scheme: https
+      baseURL: https://openbank.openbanking.imb.com.au/cds-au/v1/banking
+      documented: true
+      note: Broader CDR banking data endpoints (accounts, balances, transactions) require CDR ADR authorisation (FAPI OAuth2/OIDC); not public.
+  authModel:
+    publicPrd: none
+    consumerData: CDR ADR model (FAPI 2.0 profiled OAuth2 / OpenID Connect consumer consent)
+  versionNegotiation:
+    header: x-v
+    supported: [4, 5]
+    unsupported: [1, 2, 3]
+    unsupportedStatus: 406
+  developerPortal: https://developer.openbanking.imb.com.au/public/apis
+  cdrRegister:
+    dataHolderBrandId: 8d07eed3-588c-eb11-a821-000d3a884a20
+    brandName: IMB Bank
+    publicBaseUri: https://openbank.openbanking.imb.com.au
+    abn: '92087651974'
+sources:
+  - url: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products
+    type: APIReference
+    note: Live PRD endpoint. HTTP 200 with x-v 4/5; HTTP 406 with x-v 1/2/3. Returns data.products array, 34 records over 7 pages.
+  - url: https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary
+    type: Registry
+    note: Official CDR Register brand summary; provided IMB Bank publicBaseUri https://openbank.openbanking.imb.com.au.
+  - url: https://developer.openbanking.imb.com.au/public/apis
+    type: DeveloperPortal
+    note: IMB Innovation Sandbox and Marketplace developer portal. HTTP 200.
+  - url: https://www.imb.com.au/openbanking
+    type: Documentation
+    note: Member-facing Open Banking / Consumer Data Right explainer. HTTP 200.
+  - url: https://raw.githubusercontent.com/ConsumerDataStandardsAustralia/standards/master/slate/source/includes/swagger/cds_banking.json
+    type: OpenAPI
+    note: Source of the harvested spec - shared DSB CDS "CDR Banking API" OpenAPI 3.0.3 v1.36.0. Not IMB-proprietary.
+actions:
+  openapiPath: openapi/imb-bank-cds-banking-products-openapi.yml
+  openapiHarvested: true
+  apisYmlUpdated: true
+  reason: |
+    Bootstrapped IMB Bank identity and its one confirmed public API surface (the CDR
+    Product Reference Data endpoint). Harvested the shared DSB Consumer Data
+    Standards banking OpenAPI verbatim (converted JSON to YAML) because IMB conforms
+    to the standard and does not publish a bank-proprietary contract; provenance is
+    recorded above so the standard spec is never misrepresented as IMB-specific.
