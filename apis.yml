@@ -24,7 +24,7 @@ tags:
 - Mutual Bank
 - Product Reference Data
 created: '2026-07-20'
-modified: '2026-07-20'
+modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
 - aid: imb-bank:imb-bank-cdr-product-reference-data-api
@@ -48,9 +48,115 @@ apis:
   description: Public, unauthenticated Consumer Data Right (CDR) Product Reference
     Data API exposing IMB Bank's retail banking products (home loans, deposits, cards
     and more) under the Consumer Data Standards path /cds-au/v1/banking/products.
-    Confirmed live returning HTTP 200 with a data.products array; supports endpoint
-    versions x-v 4 and 5. Covers the GET /banking/products list and GET
-    /banking/products/{productId} detail operations.
+    Confirmed live returning HTTP 200 with x-v 4 (HTTP 406 on an unsupported x-v),
+    returning a data.products array; supports endpoint versions x-v 4 and 5. Covers
+    the GET /banking/products list and GET /banking/products/{productId} detail
+    operations. This is the only publicly callable, unauthenticated slice of IMB's
+    CDR surface.
+- aid: imb-bank:imb-bank-cdr-accounts-balances-api
+  name: IMB Bank CDR Accounts & Balances API
+  tags:
+  - CDR
+  - Open Banking
+  - Banking Accounts
+  - Account Balances
+  - Consumer Data Standards
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.imb.com.au/openbanking
+  baseURL: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.imb.com.au/openbanking
+    type: Documentation
+  - url: https://developer.openbanking.imb.com.au/public/apis
+    type: APIReference
+  - url: openapi/imb-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Accounts and Balances
+    API. Once an IMB member consents through an Accredited Data Recipient (ADR) under
+    the CDR consent model, this surface exposes GET /banking/accounts (list accounts),
+    GET /banking/accounts/{accountId} (account detail), GET /banking/accounts/balances
+    (bulk balances), and GET /banking/accounts/{accountId}/balance (single balance).
+    These endpoints require an authorized CDR access token over the mutual-TLS data
+    holder channel and are NOT publicly callable. IMB is legally required to implement
+    this standardized surface as an accredited CDR data holder; the schema is the
+    shared DSB Consumer Data Standards CDR Banking API v1.36.0.
+- aid: imb-bank:imb-bank-cdr-transactions-api
+  name: IMB Bank CDR Transactions API
+  tags:
+  - CDR
+  - Open Banking
+  - Banking Transactions
+  - Consumer Data Standards
+  - Account Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.imb.com.au/openbanking
+  baseURL: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.imb.com.au/openbanking
+    type: Documentation
+  - url: https://developer.openbanking.imb.com.au/public/apis
+    type: APIReference
+  - url: openapi/imb-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Transactions API exposing
+    GET /banking/accounts/{accountId}/transactions (transactions for an account) and
+    GET /banking/accounts/{accountId}/transactions/{transactionId} (transaction
+    detail). Access requires an IMB member's CDR consent granted to an Accredited
+    Data Recipient and a valid authorized access token over the data holder's
+    mutual-TLS channel; it is not publicly callable. Conforms to the shared DSB
+    Consumer Data Standards CDR Banking API v1.36.0 that every Australian ADI must
+    implement.
+- aid: imb-bank:imb-bank-cdr-direct-debits-scheduled-payments-api
+  name: IMB Bank CDR Direct Debits & Scheduled Payments API
+  tags:
+  - CDR
+  - Open Banking
+  - Direct Debits
+  - Scheduled Payments
+  - Consumer Data Standards
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.imb.com.au/openbanking
+  baseURL: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/payments/scheduled
+  properties:
+  - url: https://www.imb.com.au/openbanking
+    type: Documentation
+  - url: https://developer.openbanking.imb.com.au/public/apis
+    type: APIReference
+  - url: openapi/imb-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Direct Debits and
+    Scheduled Payments API. Covers GET /banking/accounts/{accountId}/direct-debits,
+    the bulk GET /banking/accounts/direct-debits, GET
+    /banking/accounts/{accountId}/payments/scheduled, and the bulk GET
+    /banking/payments/scheduled. Access requires an IMB member's CDR authorization
+    granted to an Accredited Data Recipient over the mutual-TLS data holder channel
+    and is not publicly callable. Conforms to the shared DSB Consumer Data Standards
+    CDR Banking API v1.36.0.
+- aid: imb-bank:imb-bank-cdr-payees-api
+  name: IMB Bank CDR Payees API
+  tags:
+  - CDR
+  - Open Banking
+  - Banking Payees
+  - Consumer Data Standards
+  - Account Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.imb.com.au/openbanking
+  baseURL: https://openbank.openbanking.imb.com.au/cds-au/v1/banking/payees
+  properties:
+  - url: https://www.imb.com.au/openbanking
+    type: Documentation
+  - url: https://developer.openbanking.imb.com.au/public/apis
+    type: APIReference
+  - url: openapi/imb-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Payees API exposing GET
+    /banking/payees (saved payees list) and GET /banking/payees/{payeeId} (payee
+    detail). Access requires an IMB member's CDR consent granted to an Accredited
+    Data Recipient and a valid authorized access token over the data holder's
+    mutual-TLS channel; it is not publicly callable. Conforms to the shared DSB
+    Consumer Data Standards CDR Banking API v1.36.0 that every Australian ADI is
+    required to implement.
 common:
 - type: DomainSecurity
   url: security/imb-bank-domain-security.yml

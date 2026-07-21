@@ -1,3 +1,12 @@
+# Provenance: This is the SHARED DSB Consumer Data Standards "CDR Banking API"
+# (cds_banking) v1.36.0, harvested verbatim from the Data Standards Body
+# (consumerdatastandardsaustralia.github.io/standards). It is NOT bank-proprietary:
+# every Australian ADI, including IMB Bank, is legally required to implement this
+# standardized surface. IMB serves this exact contract at its CDR data holder host
+# https://openbank.openbanking.imb.com.au/cds-au/v1 (the public /banking/products
+# slice is unauthenticated; all other paths are consumer-authorized via the CDR
+# ADR consent model). Contains all 16 CDS Banking paths across Products, Accounts,
+# Balances, Transactions, Direct Debits, Scheduled Payments and Payees.
 openapi: 3.0.3
 info:
   contact:
