@@ -158,6 +158,8 @@ apis:
     Consumer Data Standards CDR Banking API v1.36.0 that every Australian ADI is
     required to implement.
 common:
+- type: AgenticAccess
+  url: agentic-access/imb-bank-agentic-access.yml
 - type: DomainSecurity
   url: security/imb-bank-domain-security.yml
 - type: WellKnown
@@ -176,6 +178,8 @@ common:
   url: lifecycle/imb-bank-lifecycle.yml
 - type: StatusPage
   url: https://www.imb.com.au/help-centre/banking-help/service-updates
+- type: Deprecation
+  url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
 - type: Conventions
   url: conventions/imb-bank-conventions.yml
 - type: DataModel
