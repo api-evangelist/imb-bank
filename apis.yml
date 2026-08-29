@@ -13,6 +13,18 @@ description: IMB Bank (IMB Ltd, ABN 92 087 651 974) is a member-owned Australian
   Standards, alongside an accredited data recipient (ADR) consent flow for sharing
   member banking data. IMB also runs a public developer sandbox and marketplace at
   developer.openbanking.imb.com.au.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
