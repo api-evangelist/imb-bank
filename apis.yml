@@ -150,6 +150,9 @@ apis:
   - type: APIReference
     url: https://developer.openbanking.imb.com.au/public/apis
 common:
+- type: CapabilityMap
+  url: capabilities/imb-bank-capability-edges.yml
+  name: IMB Bank Business Capability Map
 - type: AgenticAccess
   url: agentic-access/imb-bank-agentic-access.yml
 - type: DomainSecurity
