@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/imb-bank/integrations
+- https://n8n.io/integrations/imb-bank/
+- https://composio.dev/toolkits/imb-bank
+- https://monid.ai/tools/imb-bank
+checked:
+- https://composio.dev/toolkits/imb-bank
+- https://monid.ai/tools/imb-bank
+- https://n8n.io/integrations/imb-bank/
+- https://zapier.com/apps/imb-bank/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
